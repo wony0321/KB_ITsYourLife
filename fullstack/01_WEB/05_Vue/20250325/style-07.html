@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파일명</title>
+    <style>
+      .input-color {
+        background-color: aqua;
+        color: red;
+      }
+      .alert-icon::after {
+        content: '!';
+        display: inline-block;
+        border: 1px solid black;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        text-align: center;
+        font-weight: bold;
+        line-height: 15px;
+        margin-left: 5px;
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p>1부터 100까지만 입력 가능합니다.</p>
+      <p>
+        점수:
+        <input
+          type="number"
+          v-model.number="num"
+          :class="{'input-color': isAlert}"
+        />
+        <span v-show="isAlert"> ❗ </span>
+        <span class="alert-icon" v-show="isAlert"></span>
+      </p>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript">
+      const { createApp, ref, watch, computed } = Vue;
+
+      const app = createApp({
+        setup() {
+          const num = ref(0);
+          //   const isAlert = ref(false);
+
+          //   watch(num, (newValue) => {
+          //     isAlert.value = newValue < 0 || newValue > 100;
+          //   });
+
+          const isAlert = computed(() => {
+            return num.value < 0 || num.value > 100;
+          });
+
+          return {
+            num,
+            isAlert,
+          };
+        },
+      });
+
+      const vm = app.mount('#app');
+    </script>
+  </body>
+</html>
