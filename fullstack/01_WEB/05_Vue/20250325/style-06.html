@@ -1,0 +1,51 @@
+`<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파일명</title>
+    <style>
+      .buttonColor {
+        background-color: aqua;
+        color: black;
+      }
+      .buttonLayout {
+        text-align: center;
+        width: 120px;
+      }
+      .staticBorder {
+        border: 1px dashed khaki;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="checkbox" v-model="isColorChecked" />색상
+      <br />
+      <input type="checkbox" v-model="isLayoutChecked" />정렬, 크기
+      <br />
+      <input type="checkbox" v-model="isBorderChecked" />테두리
+      <br />
+      <button
+        :class="{'buttonColor': isColorChecked, 'buttonLayout': isLayoutChecked, 'staticBorder': isBorderChecked}"
+      >
+        테스트버튼
+      </button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript">
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const isColorChecked = ref(false);
+          const isLayoutChecked = ref(false);
+          const isBorderChecked = ref(false);
+          return { isColorChecked, isLayoutChecked, isBorderChecked };
+        },
+      });
+
+      const vm = app.mount('#app');
+    </script>
+  </body>
+</html>

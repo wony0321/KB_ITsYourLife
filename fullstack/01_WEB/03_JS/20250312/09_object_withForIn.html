@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>09_object_withForIn</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 객체 생성 방법
+       * 1. 객체 리터럴 : {}를 사용해서 생성
+       * 2. 생성자 함수 : new Object() 를 사용하는 방식
+       * 3. 클래스 방식
+       *
+       * */
+
+      // 객체 리터럴
+      //   let product = {
+      //     제품명: '7D 건조망고',
+      //     유형: '당절임',
+      //     성분: '망고, 설탕, 메타중아황산나트륨, 치자황색소',
+      //     원산지: '필리핀',
+      //   };
+
+      //   console.log(...Object.keys(product));
+      //   console.log(...Object.values(product));
+      //   console.log(...Object.entries(product));
+
+      //   함수로 ... in문으로 product 각 요소 출력하는 함수 만들고 출력
+
+      //   function printProduct() {
+      //     for (let p in product) {
+      //       console.log(`${p}: ${product[p]}`);
+      //     }
+      //   }
+
+      let printProduct = (products) => {
+        for (let product in products) {
+          console.log(`${product}: ${products[product]}`);
+        }
+      };
+
+      // 클래스 방식
+      class Product {
+        constructor(제품명, 유형, 성분, 원산지) {
+          this.제품명 = 제품명;
+          this.유형 = 유형;
+          this.성분 = 성분;
+          this.원산지 = 원산지;
+        }
+      }
+
+      let product = new Product(
+        '7D 건조망고',
+        '당절임',
+        '망고, 설탕, 메타중아황산나트륨, 치자황색소',
+        '필리핀'
+      );
+
+      printProduct(product);
+    </script>
+  </body>
+</html>

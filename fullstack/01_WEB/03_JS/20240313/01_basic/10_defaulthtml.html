@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10_defaulthtml</title>
+  </head>
+  <body>
+    <a id="button" href="https://www.naver.com">button</a>
+
+    <script>
+      const $button = document.getElementById('button');
+
+      $button.onclick = () => {
+        return false;
+      };
+
+      $button.addEventListener(
+        ('keydown',
+        (event) => {
+          if (event.key === 'click') {
+            event.preventDefault();
+          }
+        })
+      );
+    </script>
+  </body>
+</html>

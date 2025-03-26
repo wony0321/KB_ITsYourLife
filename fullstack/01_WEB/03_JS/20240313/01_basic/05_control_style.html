@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05_control_style</title>
+    <script>
+      window.onload = () => {
+        let output = '';
+
+        for (let i = 0; i < 255; i++) {
+          output += '<div></div>';
+        }
+
+        document.body.innerHTML = output;
+
+        const $divs = document.querySelectorAll('div');
+
+        /*
+        forEach
+        - 배열의 각 요소에 주어진 함수를 실행하는 메서드
+        - callback함수를 전달 받음
+            * 현재 처리중인 배열의 요소
+            * 현재 처리중인 요소의 인덱스
+            * array (forEach를 호출하는) (선택)
+        - 반환값이 undefined
+        - break나 continue 사용 불가
+        */
+
+        $divs.forEach((el, i) => {
+          el.style.background = `rgb(${i}, ${i}, ${i})`;
+          el.style.height = '2px';
+        });
+
+        // const fragment = document.createDocumentFragment();
+        // for (let i = 0; i < 255; i++) {
+        //   const div = document.createElement('div');
+        //   div.style.height = '2px';
+        //   div.style.backgroundColor = `rgb(${i}, ${i}, ${i})`;
+        //   fragment.appendChild(div);
+        // }
+        // document.body.appendChild(fragment);
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

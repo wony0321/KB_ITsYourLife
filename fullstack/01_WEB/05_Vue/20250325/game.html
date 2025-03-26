@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파일명</title>
+    <style>
+      body {
+        max-width: 1000px;
+        height: 100vh;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+      .startBtn {
+        background-color: gold;
+        padding: 10px;
+        cursor: pointer;
+        width: 100%;
+      }
+      .game {
+        margin-top: 20px;
+        height: 100px;
+        border: 1px solid black;
+        text-align: center;
+        line-height: 100px;
+      }
+      .waiting-bg {
+        background-color: lightgray;
+      }
+      .ready-bg {
+        background-color: greenyellow;
+        cursor: pointer;
+      }
+      .message {
+        margin-top: 30px;
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+        padding: auto;
+        white-space: nowrap;
+        border: 1px solid lightgray;
+      }
+      .gameBox {
+        position: absolute;
+        width: 250px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h2>🧨 반사 신경 테스트 게임</h2>
+      <button @click="gameShow" class="startBtn">게임 시작</button>
+      <div ref="gameBoxRef" class="gameBox">
+        <div
+          v-show="showbox"
+          class="game"
+          @click="clickBox"
+          :class="waiting ? 'waiting-bg' : 'ready-bg'"
+        >
+          {{ waiting ? "기다리세요..." : "클릭하세요!" }}
+        </div>
+        <div class="message" v-show="showResult">{{ message }}</div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript">
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const showbox = ref(false);
+          const waiting = ref(true);
+          const message = ref('');
+          const startTime = ref('');
+          const showResult = ref(false);
+          let timeoutId = null;
+
+          const gameBoxRef = ref(null);
+
+          function positionGameBox() {
+            if (gameBoxRef.value) {
+              const bodyWidth = document.body.clientWidth;
+              const bodyHeight = document.body.clientHeight;
+              const boxWidth = gameBoxRef.value.offsetWidth;
+              const boxHeight = gameBoxRef.value.offsetHeight;
+
+              const randomX = Math.max(
+                0,
+                Math.min(
+                  bodyWidth - boxWidth,
+                  Math.floor(Math.random() * (bodyWidth - boxWidth))
+                )
+              );
+
+              const randomY = Math.max(
+                0,
+                Math.min(
+                  bodyHeight - boxHeight,
+                  Math.floor(Math.random() * (bodyHeight - boxHeight))
+                )
+              );
+
+              gameBoxRef.value.style.left = `${randomX}px`;
+              gameBoxRef.value.style.top = `${randomY}px`;
+            }
+          }
+
+          function gameShow() {
+            message.value = '';
+            showbox.value = false;
+            waiting.value = true;
+            showResult.value = false;
+            positionGameBox();
+
+            setTimeout(() => {
+              showbox.value = true;
+              gameStart();
+            }, 1000);
+          }
+
+          function gameStart() {
+            let randTime = Math.floor(Math.random() * (3000 - 1000)) + 1000;
+
+            timeoutId = setTimeout(() => {
+              waiting.value = false;
+              startTime.value = performance.now();
+            }, randTime);
+          }
+
+          function clickBox() {
+            if (waiting.value) {
+              message.value = `💥 너무 빨리 클릭했습니다!`;
+              clearTimeout(timeoutId);
+              showbox.value = false;
+            } else {
+              const reactionTime = performance.now() - startTime.value;
+              message.value = `💡 반응속도: ${reactionTime.toFixed(2)}ms`;
+            }
+            showResult.value = true;
+          }
+
+          return {
+            showbox,
+            waiting,
+            message,
+            startTime,
+            showResult,
+            gameShow,
+            gameStart,
+            clickBox,
+            gameBoxRef,
+            positionGameBox,
+          };
+        },
+      });
+
+      const vm = app.mount('#app');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파일명</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>📌 게시판 목록</h1>
+      <div class="search-bar" >
+        <input type="text" placeholder="검색어를 입력하세요." v-model="selectQuery">
+      </div>
+      <div class="sort-buttons">
+        <button @click="sortPosts('asc')">오름차순</button>
+        <button @click="sortPosts('desc')">내림차순</button>
+      </div>
+      <ul>
+        <li
+          v-for="post in filteredPosts"
+          :key="post.no"
+          class="post-item"
+          @click="selectPost(post)"
+        >
+          <span>{{post.no}}. {{ post.title }}</span>
+          <button class = "delete-button" @click = "deletePost(post)">삭제</button>
+        </li>
+      </ul>
+      <div v-if="selectedPost" class="post-content">
+        <h2>{{ selectedPost.title }}</h2>
+        <p>{{ selectedPost.content }}</p>
+        <button @click="closePost">닫기</button>
+      </div>
+      <div>
+        <h3>새 글 등록</h3>
+        <input type="text" v-model = "newPostTitle" placeholder="제목">
+        <input type="text" v-model = "newPostContent" placeholder="내용">
+        <button @click = "addPost">등록</button>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript">
+      const { createApp, ref, computed } = Vue;
+      const app = createApp({
+        setup() {
+          const posts = ref([
+            {
+              no: 1,
+              title: 'Vue.js 기초 배우기',
+              content:
+                'Vue.js는 사용자 인터페이스를 구축하기 위한 프로그레시브 프레임워크입니다.',
+            },
+            {
+              no: 2,
+              title: '자바스크립트 ES6 문법',
+              content:
+                'ES6는 JavaScript의 최신 문법을 포함하며, let/const, 화살표 함수, 구조 분해 할당 등을 제공합니다.',
+            },
+            {
+              no: 3,
+              title: 'Node.js와 Express',
+              content:
+                'Node.js는 서버 측에서 JavaScript를 실행할 수 있도록 하는 런타임이며, Express는 이를 위한 경량 웹 프레임워크입니다.',
+            },
+            {
+              no: 4,
+              title: 'MongoDB 기본 개념',
+              content:
+                'MongoDB는 NoSQL 데이터베이스로 JSON과 유사한 문서 기반 데이터를 저장하고 관리할 수 있습니다.',
+            },
+            {
+              no: 5,
+              title: '프론트엔드와 백엔드의 차이',
+              content:
+                '프론트엔드는 사용자가 보는 부분을 개발하는 것이고, 백엔드는 서버와 데이터베이스를 관리하는 부분입니다.',
+            },
+            {
+              no: 6,
+              title: '비동기 프로그래밍',
+              content:
+                'JavaScript의 비동기 처리 방식에는 콜백, 프로미스, async/await가 있습니다.',
+            },
+            {
+              no: 7,
+              title: 'Vue Router 사용법',
+              content:
+                'Vue Router를 사용하면 Vue.js 애플리케이션에서 페이지 이동을 쉽게 처리할 수 있습니다.',
+            },
+            {
+              no: 8,
+              title: '컴포넌트 기반 개발',
+              content:
+                'Vue.js에서는 컴포넌트를 사용하여 UI를 작은 단위로 쪼개서 관리할 수 있습니다.',
+            },
+            {
+              no: 9,
+              title: 'CSS와 SCSS 차이점',
+              content:
+                'SCSS는 CSS의 확장된 버전으로 변수, 중첩, 믹스인 등을 지원합니다.',
+            },
+            {
+              no: 10,
+              title: 'Git과 GitHub 사용법',
+              content:
+                'Git은 버전 관리 시스템이며, GitHub는 이를 활용한 원격 저장소 플랫폼입니다.',
+            },
+            ...Array.from({ length: 3000 }, (_, i) => ({
+              no: i + 11,
+              title: `게시글 제목 ${i + 11}`,
+              content: `게시글 ${
+                i + 11
+              }의 내용입니다. 이 글은 자동으로 생성된 내용입니다.`,
+            })),
+          ]);
+          const selectedPost = ref(null);
+          const selectPost = (post) => {
+            selectedPost.value = post;
+          };
+          const closePost = () => {
+            selectedPost.value = null;
+          };
+          const newPostTitle = ref('');
+          const newPostContent = ref('');
+          const addPost = ()=>{
+            const newPost = {
+              no: posts.value.length + 1,
+              title: newPostTitle.value,
+              content: newPostContent.value,
+            };
+            posts.value.push(newPost);
+            newPostTitle.value = '';
+            newPostContent.value = '';
+          }
+          const deletePost = (post) => {
+            const index = posts.value.findIndex((p) => p.no === post.no);
+            if (index !== -1) {
+              posts.value.splice(index, 1);
+            }
+          };
+          // 정렬 기능
+          const sortPosts = (order) => {
+            if (order === 'asc') {
+                console.log('오름차순');
+                /*
+                SORT(콜백함수): 배열의 각 요소를 콜백함수를 기준으로 비교해 정렬
+                결과값이 음수면 -> a가 b보다 앞에 와야함
+                결과값이 양수면 -> a가 b보다 뒤에 와야함
+                결과값이 0이면 -> 순서를 바꾸지 않음
+                */
+
+                // 콜백함수로 기준점 만들어서 sort 하기
+                // 여기서 a, b는 첫번째 두번째꺼 비교해서 sort
+                posts.value.sort((a, b) => a.no - b.no)
+            } else {
+                console.log('내림차순');
+                posts.value.sort((a, b) => b.no - a.no)
+            }
+          }
+          
+          // 검색 기능
+          const selectQuery = ref('')
+        
+
+          // 검색어가 없을 때는 전체 게시글 보여주기
+          const filteredPosts = computed (() => {
+            console.log('검색기능 호출됨');
+            if (!selectQuery.value) return posts.value;           
+
+            const query = selectQuery.value.toLowerCase();            
+
+            // filter: 배열의 각 요소에 대해 주어진 조건을 만족하는 요소만 모아 새 배열을 반환함
+            return posts.value.filter((post) => 
+                post.title.toLowerCase().includes(query) || 
+                post.content.toLowerCase().includes(query)
+            );
+        
+          })
+
+          return {
+            posts,
+            selectedPost,
+            selectPost,
+            closePost,
+            newPostContent,
+            newPostTitle,
+            addPost,
+            deletePost,
+            sortPosts,
+            selectQuery,
+            filteredPosts
+          };
+        },
+      });
+      const vm = app.mount('#app');
+    </script>
+  </body>
+  <style>
+        h1 {
+          text-align: center;
+          color: #333;
+        }
+        ul {
+          list-style-type: none;
+          padding: 0;
+        }
+        .post-item {
+          cursor: pointer;
+          padding: 10px;
+          border-bottom: 1px solid #ddd;
+          position: relative;
+        }
+        .post-item:hover {
+          background: #F4F4F4;
+        }
+        .post-content {
+          margin-top: 20px;
+          padding: 15px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          background: #fff;
+        }
+        button {
+          margin-top: 10px;
+          padding: 5px 10px;
+          border: none;
+          background: #FF6B6B;
+          color: white;
+          cursor: pointer;
+          border-radius: 3px;
+        }
+        button:hover {
+          background: #FF4F4F;
+        }
+        .delete-button {
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        .sort-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .search-bar{
+          display: flex;
+          justify-content: center;
+        }
+  </style>
+</body>
+</html>

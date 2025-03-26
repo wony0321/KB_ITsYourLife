@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01_condition_ifelseif</title>
+  </head>
+  <body>
+    <script>
+      let date = new Date();
+      let hour = date.getHours();
+      console.log(hour);
+
+      if (hour < 5) {
+        console.log('잠을 자렴');
+      } else if (hour >= 5 && hour < 7) {
+        console.log('준비');
+      } else if (7 <= hour && hour < 9) {
+        console.log('출근');
+      } else if (9 <= hour && hour < 12) {
+        console.log('빈둥 빈둥');
+      } else if (12 <= hour && hour < 14) {
+        console.log('식사');
+      } else if (14 <= hour) {
+        console.log('여러 가지 업무 수행');
+      }
+
+      switch (true) {
+        case hour >= 0 && hour < 5:
+          console.log('잠을 자렴');
+          break;
+        case hour >= 5 && hour < 7:
+          console.log('준비');
+          break;
+        case hour >= 7 && hour < 9:
+          console.log('출근');
+          break;
+        case hour >= 9 && hour < 12:
+          console.log('빈둥 빈둥');
+          break;
+        case hour >= 12 && hour < 14:
+          console.log('식사');
+          break;
+        default:
+          console.log('여러 가지 업무 수행');
+      }
+    </script>
+  </body>
+</html>

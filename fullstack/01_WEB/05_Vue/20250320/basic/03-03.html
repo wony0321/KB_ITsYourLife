@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파일명</title>
+    <style>
+      .title-text {
+        background-color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" :value="message" />
+      <input type="text" v-bind:value="message" />
+      <br />
+      <img v-bind:src="imagePath" :alt="message" />
+      <img :src="imagePath" :alt="message" />
+
+      <h1 :style="h1Style">hi</h1>
+      <h1 v-bind="{style: h1Style, class: h1Class}">hi</h1>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript">
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const message = ref('v-bind 디렉티브');
+          const imagePath = ref(
+            'https://contactsvc.bmaster.kro.kr/photos/18.jpg'
+          );
+
+          const h1Class = ref('title-text');
+
+          const h1Style = ref({
+            color: 'blue',
+            fontSize: '24px',
+            fontWeight: 'bold',
+            textDecoration: 'underline',
+          });
+
+          return {
+            message,
+            imagePath,
+            h1Style,
+            h1Class,
+          };
+        },
+      });
+
+      const vm = app.mount('#app');
+    </script>
+  </body>
+</html>

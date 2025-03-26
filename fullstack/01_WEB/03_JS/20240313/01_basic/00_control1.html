@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>00_control1</title>
+    <!-- 페이지가 로드된 이후 실행되는 script -->
+    <script>
+      // window.onload: 웹 페이지의 모든 콘텐츠 (HTML, CSS, 이미지 등)이 완전히 로드된 이후 실행되는 이벤트 핸들러
+      window.onload = function () {
+        // $: 요소 노드를 선택할 때 사용하는 변수명에 붙이는 관례
+        //   다른 값들을 담는 변수랑 구분 짓기 위함
+        const $h1 = document.getElementById('header');
+
+        $h1.style.color = 'red';
+      };
+    </script>
+  </head>
+  <body>
+    <h1 id="header">안녕하세요</h1>
+  </body>
+</html>

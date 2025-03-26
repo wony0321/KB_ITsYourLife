@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="alert('클릭했네?'); console.log('클릭했네?');">
+      클릭해보세요
+    </button>
+    <button onmouseover="hello('임예원');">마우스를 올려보세요</button>
+
+    <script>
+      /*
+        이벤트 핸들러 어트리뷰트 방식
+        - 장점: html 코드가 간단하고, 직관적, HTML 요소에서 직접 이벤트 처리 로직을 볼 수 있음
+        - 단점: HTML JavaScript 코드가 혼합되어 코드 유지보수가 어려움, HTML이 복잡해짐
+        */
+      function hello(name) {
+        alert(`${name}씨, 마우스를 올리지 마세요!`);
+      }
+
+      function onclick(event) {
+        alert('클릭했네?');
+        console.log('클릭했네?');
+      }
+    </script>
+  </body>
+</html>

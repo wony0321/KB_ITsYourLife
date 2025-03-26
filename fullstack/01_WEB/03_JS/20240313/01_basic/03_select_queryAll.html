@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03_select_queryAll</title>
+    <script>
+      window.onload = function () {
+        const h1s = document.querySelectorAll('h1');
+
+        // $h1.forEach((element) => {
+        //   element.style.color = 'orange';
+        //   element.style.background = 'red';
+        //   element.innerHTML = 'From JavaScript';
+        // });
+
+        for (let i = 0; i < h1s.length; i++) {
+          let $h1 = h1s[i];
+          $h1.style.color = 'orange';
+          $h1.style.background = 'red';
+          $h1.innerHTML = 'From JavaScript';
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Header</h1>
+    <h1>Header</h1>
+    <h1>Header</h1>
+  </body>
+</html>

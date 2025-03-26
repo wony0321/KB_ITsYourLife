@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>20_display_inline</title>
+    <style>
+      /*       
+      주요 display 값
+      1. block
+      2. inline
+      3. inline-block: inline처럼 배치는 되고, 높이랑 너비 설정 가능
+      4. none
+      5. flex: 레이아웃 구성을 위한 컨테이너를 설정, row, col
+      6. grid: 그리드 기반, 쇼핑몰에서 상품 여러개 카드로 보여줄 때
+      */
+      #box {
+        width: 250px;
+        height: 30px;
+        display: inline;
+        background-color: skyblue;
+      }
+    </style>
+  </head>
+  <body>
+    <span style="border: 1px solid black; padding: 5px">
+      <span>더미 객체</span>
+      <div id="box">대상 객체</div>
+      <span>더미 객체</span>
+    </span>
+  </body>
+</html>

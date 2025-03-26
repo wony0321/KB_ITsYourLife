@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>selector_basic</title>
+    <style>
+      h1 {
+        background-color: orange;
+        color: red;
+      }
+      div {
+        background-color: green !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+    Cascading Style Sheets
+    - HHTML 문의 스타일을 정의하는 시트 언어
+    
+    적용 방식
+    1. 외부 스타일 시트
+    - 별도의 CSS을 생성하여 HTML 문서와 연결
+    - <link> 요소를 사용하여 연결
+    - <link rel="stylesheet" href="style.css" />
+    - 유지보수하기 쉬움
+    2. 내부 스타일 시트
+    - HTML 문서의 head 태그 내에 style 태그를 사용하여 CSS 정의
+
+    3. 인라인 스타일 시트
+    - HTML 요소의 속성을 이용해 직접 스타일을 적용
+    
+    우선순위
+    1. important: 가장 높은 우선순위 so 자주 쓰지는 않음
+    2. 인라인 스타일
+    3. ID 선택자: 고유한 선택자
+    4. 클래스 선택자: 여러 요소에 적용 가능
+    5. 태그 선택자: 모든 태그에 적용
+    6. 전체 선택자: 모든 요소에 적용
+    7. 상속 스타일: *
+
+    => 동일한 우선순위일 경우에는 나중에 선언된 스타일이 적용됨
+    -->
+    <h1>CSS3 선택자 기본</h1>
+    <h2>우선순위 테스트</h2>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>08_dom_clock</title>
+  </head>
+  <body>
+    <h1 id="clock"></h1>
+
+    <script>
+      const $clock = document.getElementById('clock');
+
+      // 일정 시간을 간격으로 함수를 반복적으로 실행하는 메서드
+      // 밀리초 단위 (ms)
+
+      // 고차 함수
+      setInterval(() => {
+        let now = new Date();
+
+        console.log(now.toString());
+        $clock.innerHTML = now.toString();
+      }, 1000);
+    </script>
+  </body>
+</html>

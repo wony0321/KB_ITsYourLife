@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01_select_id</title>
+    <script>
+      window.onload = function () {
+        // 주어진 ID를 가진 요소 하나를 선택하는 메서드
+        const $h1 = document.getElementById('header');
+
+        $h1.style.color = 'orange';
+        $h1.style.background = 'red';
+        $h1.innerHTML = 'From JavaScript';
+      };
+    </script>
+  </head>
+  <body>
+    <h1 id="header">Header</h1>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03_function_callback</title>
+  </head>
+  <body>
+    <script>
+      //   function repeatWithCallback(count, callback) {
+      //     let i = 0;
+      //     while (i < count) {
+      //       callback(i);
+      //       i++;
+      //     }
+      //   }
+
+      // 기명 함수 (이름이 있는 함수) 선언
+      function callback(i) {
+        alert(`함수 호출 ${i}회`);
+      }
+
+      // func_reap 함수 정의
+      function func_reap(n, callback) {
+        for (let i = 0; i < n; i++) {
+          callback(i); // 콜백 함수 실행
+        }
+      }
+
+      // 기명 함수 callback을 전달
+      func_reap(5, callback);
+
+      //   repeatWithCallback(5, (i) => alert(`함수 호출 ${i}회`));
+    </script>
+  </body>
+</html>

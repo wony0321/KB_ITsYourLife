@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04_absolutePosition</title>
+    <!-- 
+    Position: absolute 속성
+    - 요소를 일반적인 문서 흐름이 아닌 가장 가까운 position이 저장된 조상요소를 기준으로 배치
+    - 지정된 조상요소가 없으면 최상위(body)를 기준으로 배치
+    - top, right, bottom, left
+    -->
+    <style>
+      body {
+        background-color: red;
+        /* min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center; */
+      }
+      #container {
+        background-color: orange;
+        width: 500px;
+        height: 250px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        /* margin-left: -250px;
+        margin-top: -125px; */
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"><h1>요소의 중앙배치</h1></div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05_position_absoluteLeftTop</title>
+    <style>
+      .section {
+        border: 2px solid black;
+        height: 15vh;
+        position: relative;
+        overflow: hidden;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+      }
+      .red {
+        background-color: red;
+        left: 10px;
+        top: 10px;
+        z-index: 20;
+      }
+      .green {
+        background-color: green;
+        left: 50px;
+        top: 50px;
+        z-index: 10;
+      }
+      .blue {
+        background-color: blue;
+        left: 100px;
+        top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Lorem ipsum dolor sit.</h1>
+    <div class="section">
+      <div class="box red"></div>
+      <div class="box green"></div>
+      <div class="box blue"></div>
+    </div>
+    <h1>Lorem ipsum dolor sit.</h1>
+  </body>
+</html>
