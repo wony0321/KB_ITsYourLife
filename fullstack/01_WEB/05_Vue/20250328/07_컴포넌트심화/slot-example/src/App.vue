@@ -1,6 +1,8 @@
 <script setup>
 import Parent from './components/01_slot-basic/Parent.vue'
 import Parent2 from './components/02_Named-slot/Parent2.vue'
+import Parent3 from './components/03_dynamic-slot/Parent3.vue'
+import Parent4 from './components/04-scoped-slot/Parent4.vue'
 </script>
 
 <!--
@@ -13,6 +15,10 @@ Slot
   <Parent />
   <hr />
   <Parent2 />
+  <hr />
+  <Parent3 />
+  <hr />
+  <Parent4 />
 </template>
 
 <style scoped></style>
