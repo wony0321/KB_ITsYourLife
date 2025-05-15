@@ -63,3 +63,30 @@ and salary > all (
     from salaries
     where to_date = '9999-01-01'
 );
+
+-- employees db에서 각 부서별 재직자의 수를 구하시오
+-- ○ 부서 번호로 구분하고, 부서 번호로 오름 차순 정렬하여 출력한다.
+select dept_no, count(*)
+from dept_emp
+where to_date = '9999-01-01'
+group by dept_no
+order by dept_no asc ;
+
+/*
+ALL : 서브쿼리 결과 모든 값과 비교
+ANY/SOME : 서브쿼리 결과가 하나로도 만족하면 참
+*/
+-- 급여가 재직자 모두의 평균보다 크면 출력
+select *
+from salaries
+where to_date = '9999-01-01'
+  and salary > all (select avg(salary)
+                    from salaries
+                    where to_date = '9999-01-01');
+
+select *
+from salaries
+where to_date = '9999-01-01'
+  and salary = any (select min(salary)
+                    from salaries
+                    where to_date = '9999-01-01');
