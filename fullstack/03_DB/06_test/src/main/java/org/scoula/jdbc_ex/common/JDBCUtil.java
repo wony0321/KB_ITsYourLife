@@ -23,13 +23,13 @@ public class JDBCUtil {
             // 데이터베이스 접속에 필요한 정보 추출
             String driver = prop.getProperty("driver");
             String url = prop.getProperty("url");
-            String user = prop.getProperty("user");
+            String id = prop.getProperty("id");
             String password = prop.getProperty("password");
             
             Class.forName(driver);
 
             // jdbc_ex 데이터베이스에 접속하여 Connection 객체 보관
-            connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(url, id, password);
 
             System.out.println("연결 성공 객체: " + connection);
         } catch (IOException | ClassNotFoundException e) {
